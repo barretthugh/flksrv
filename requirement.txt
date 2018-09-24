@@ -42,9 +42,6 @@ jupyter
 jupyter-client
 jupyter-console
 jupyter-core
-Keras==2.1.6
-Keras-Applications
-Keras-Preprocessing
 kiwisolver
 lxml
 Markdown
@@ -86,8 +83,6 @@ six
 SQLAlchemy
 TA-Lib
 tables
-tensorboard
-tensorflow
 termcolor
 terminado
 testpath
