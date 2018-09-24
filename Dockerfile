@@ -36,6 +36,6 @@ RUN apt-get update \
 
 WORKDIR "/"
 
-EXPOSE 8888 8000 8080
+EXPOSE 8888 8000 8080 6006
 
 CMD ["jupyter", "lab", "--allow-root"]
