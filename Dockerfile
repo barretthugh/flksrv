@@ -3,9 +3,11 @@ FROM python:3.6.6-jessie
 ENV TZ=Asia/Shanghai
 
 COPY requirement.txt /requirement.txt
-# COPY pip.conf /root/.pip/pip.conf     for mirror in China
-# COPY source.list /etc/apt/sources.list    for mirror in China
 COPY jupyter_notebook_config.py /root/.jupyter/
+# for mirror in China
+# COPY source.list /etc/apt/sources.list
+# COPY pip.conf /root/.pip/pip.conf
+
 USER root
 
 RUN apt-get update \
@@ -27,6 +29,7 @@ RUN apt-get update \
   && unzip /usr/local/bin/chromedriver.zip \
   && mv /chromedriver /usr/local/bin/ \
   && rm /usr/local/bin/chromedriver.zip \
+  && rm /chrome.deb \
   && chmod +x /usr/local/bin/chromedriver \
 	&& pip install Tushare \
   && jupyter nbextension enable --py widgetsnbextension \

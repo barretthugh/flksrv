@@ -106,3 +106,5 @@ TA-Lib
 ipywidgets
 jupyterlab
 gensim
+prompt_toolkit
+cn_stock_holidays
