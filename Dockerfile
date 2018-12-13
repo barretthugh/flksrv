@@ -4,7 +4,7 @@ ENV TZ=Asia/Shanghai
 
 COPY requirement.txt /requirement.txt
 COPY jupyter_notebook_config.py /root/.jupyter/
-# for mirror in China
+# for mirrors in China
 # COPY source.list /etc/apt/sources.list
 # COPY pip.conf /root/.pip/pip.conf
 
@@ -25,13 +25,14 @@ RUN apt-get update \
 	&& rm ta-lib-0.4.0-src.tar.gz \
   && curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /chrome.deb \
 	&& dpkg -i /chrome.deb || apt-get install -yf \
-  && curl https://chromedriver.storage.googleapis.com/2.42/chromedriver_linux64.zip -o /usr/local/bin/chromedriver.zip \
+  && curl https://chromedriver.storage.googleapis.com/2.44/chromedriver_linux64.zip -o /usr/local/bin/chromedriver.zip \
   && unzip /usr/local/bin/chromedriver.zip \
   && mv /chromedriver /usr/local/bin/ \
+  && chmod +x /usr/local/bin/chromedriver \
   && rm /usr/local/bin/chromedriver.zip \
   && rm /chrome.deb \
-  && chmod +x /usr/local/bin/chromedriver \
 	&& pip install Tushare \
+  && pip install prompt-toolkit \
   && jupyter nbextension enable --py widgetsnbextension \
   && jupyter serverextension enable --py jupyterlab
 
