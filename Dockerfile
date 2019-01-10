@@ -11,21 +11,11 @@ COPY jupyter_notebook_config.py /root/.jupyter/
 USER root
 
 RUN apt-get update \
-  && apt-get install -y wget unzip \
-  && cd / \
-  && wget https://downloads.sourceforge.net/project/ta-lib/ta-lib/0.4.0/ta-lib-0.4.0-src.tar.gz \
-	&& tar xvf ta-lib-0.4.0-src.tar.gz \
-	&& cd ta-lib \
-	&& ./configure --prefix=/usr \
-	&& make \
-	&& make install \
+  && apt-get install -y unzip \
 	&& pip install -r /requirement.txt \
-	&& cd .. \
-	&& rm -rf ta-lib \
-	&& rm ta-lib-0.4.0-src.tar.gz \
   && curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /chrome.deb \
 	&& dpkg -i /chrome.deb || apt-get install -yf \
-  && curl https://chromedriver.storage.googleapis.com/2.44/chromedriver_linux64.zip -o /usr/local/bin/chromedriver.zip \
+  && curl https://chromedriver.storage.googleapis.com/2.45/chromedriver_linux64.zip -o /usr/local/bin/chromedriver.zip \
   && unzip /usr/local/bin/chromedriver.zip \
   && mv /chromedriver /usr/local/bin/ \
   && chmod +x /usr/local/bin/chromedriver \
@@ -38,5 +28,5 @@ RUN apt-get update \
 
 WORKDIR "/"
 
-EXPOSE 8888 8000 8080 6006
+EXPOSE 6666 9000 36900
 CMD ["jupyter", "lab", "--allow-root"]
