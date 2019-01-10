@@ -60,7 +60,7 @@ parso
 pexpect
 pickleshare
 plotly
-prompt-toolkit==1.0.15
+prompt_toolkit
 protobuf
 psycopg2-binary
 ptyprocess

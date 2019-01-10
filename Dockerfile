@@ -22,11 +22,11 @@ RUN apt-get update \
   && rm /usr/local/bin/chromedriver.zip \
   && rm /chrome.deb \
 	&& pip install Tushare \
-  && pip install prompt-toolkit \
+  && pip install prompt_toolkit \
   && jupyter nbextension enable --py widgetsnbextension \
   && jupyter serverextension enable --py jupyterlab
 
 WORKDIR "/"
 
-EXPOSE 6666 9000 36900
+EXPOSE 6666 9000 8888
 CMD ["jupyter", "lab", "--allow-root"]
