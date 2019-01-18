@@ -105,3 +105,4 @@ ipywidgets
 jupyterlab
 gensim
 cn_stock_holidays
+mpl_finance
