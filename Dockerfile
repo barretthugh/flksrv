@@ -10,10 +10,10 @@ COPY jupyter_notebook_config.py /root/.jupyter/
 
 USER root
 
-RUN apk add --update-cache alpine-sdk python3-dev py3-zmq python-dev py-pip unzip \
+RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories \
+  && echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
+  && apk add --update-cache alpine-sdk python3-dev py3-zmq python-dev py-pip chromium@edge harfbuzz@edge nss@edge \
 	&& pip3 install -r /requirement.txt \
-  && curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /chrome.deb \
-	&& dpkg -i /chrome.deb || apt-get install -yf \
   && curl https://chromedriver.storage.googleapis.com/73.0.3683.20/chromedriver_linux64.zip -o /usr/local/bin/chromedriver.zip \
   && unzip /usr/local/bin/chromedriver.zip \
   && mv /chromedriver /usr/local/bin/ \
@@ -27,6 +27,7 @@ RUN apk add --update-cache alpine-sdk python3-dev py3-zmq python-dev py-pip unzi
   && npm --unsafe-perm i -g ijavascript \
   && ijsinstall --install=global \
   && npm i d3 crossfilter2 dc jquery melt \
+  && rm -rf /var/cache/*
 
 WORKDIR "/"
 
