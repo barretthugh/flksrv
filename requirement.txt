@@ -69,7 +69,6 @@ pyparsing
 python-dateutil
 pytz
 PyYAML
-pyzmq
 qtconsole
 requests
 requests-file
