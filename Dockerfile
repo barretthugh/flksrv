@@ -10,7 +10,7 @@ COPY jupyter_notebook_config.py /root/.jupyter/
 
 USER root
 
-RUN apk add --update-cache alpine-sdk python3-dev py3-zmq python-dev py-pip unzip
+RUN apk add --update-cache alpine-sdk python3-dev py3-zmq python-dev py-pip unzip \
 	&& pip3 install -r /requirement.txt \
   && curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /chrome.deb \
 	&& dpkg -i /chrome.deb || apt-get install -yf \
