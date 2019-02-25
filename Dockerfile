@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM python:3.6.5-jessie
 
 ENV TZ=Asia/Shanghai
 
@@ -10,23 +10,26 @@ COPY jupyter_notebook_config.py /root/.jupyter/
 
 USER root
 
-RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories \
-  && echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories \
-  && apk add --update-cache alpine-sdk python3-dev py3-zmq python-dev py-pip chromium@edge harfbuzz@edge nss@edge \
-	&& pip3 install -r /requirement.txt \
+RUN apt-get update \
+  && apt-get install -y unzip \
+	&& pip install -r /requirement.txt \
+  && curl https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /chrome.deb \
+	&& dpkg -i /chrome.deb || apt-get install -yf \
   && curl https://chromedriver.storage.googleapis.com/73.0.3683.20/chromedriver_linux64.zip -o /usr/local/bin/chromedriver.zip \
   && unzip /usr/local/bin/chromedriver.zip \
   && mv /chromedriver /usr/local/bin/ \
   && chmod +x /usr/local/bin/chromedriver \
   && rm /usr/local/bin/chromedriver.zip \
   && rm /chrome.deb \
-	&& pip3 install Tushare \
-  && pip3 install prompt_toolkit \
+	&& pip install Tushare \
+  && pip install prompt_toolkit \
   && jupyter nbextension enable --py widgetsnbextension \
   && jupyter serverextension enable --py jupyterlab \
+  && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
+  && apt-get install -y nodejs \
   && npm --unsafe-perm i -g ijavascript \
   && ijsinstall --install=global \
-  && npm i d3 crossfilter2 dc jquery melt \
+  && npm i d3 crossfilter2 dc jquery melt highcharts \
   && rm -rf /var/cache/*
 
 WORKDIR "/"

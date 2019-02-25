@@ -32,7 +32,6 @@ idna
 ipykernel
 ipython
 ipython-genutils
-ipywidgets
 itsdangerous
 jedi
 jieba
@@ -62,7 +61,6 @@ pickleshare
 plotly
 prompt_toolkit
 protobuf
-psycopg2-binary
 ptyprocess
 Pygments
 pyparsing
